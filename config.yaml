@@ -1,0 +1,2 @@
+destination:
+  batch-size: 5000
