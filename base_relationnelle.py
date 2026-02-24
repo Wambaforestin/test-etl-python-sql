@@ -5,6 +5,7 @@ import urllib.parse
 import os
 import sys
 import pandas as pd
+import polars as pl
 
 import logging
 
@@ -39,4 +40,13 @@ try:
     logging.info("Requete executee avec succes.")
 except SQLAlchemyError as e:
     logging.error(f"Erreur lors de l'exécution de la requête: {e}")
+    sys.exit(1)
+
+
+# la différence entre pandas et polars.
+
+try:
+    pl_df = pl.read_database(query, engine)
+except Exception as e:
+    logging.error(f"Erreur lors de la conversion du DataFrame pandas en Polars: {e}")
     sys.exit(1)
