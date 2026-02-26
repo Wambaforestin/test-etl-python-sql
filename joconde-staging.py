@@ -1,8 +1,10 @@
 import polars as pl
-import outils
+import utils
 from sqlalchemy import MetaData, create_engine, insert, text
 from dotenv import load_dotenv
-import urllib, logging, os
+import urllib
+import os
+import logging
 import yaml
 
 with open("config.yaml", "r") as f:
@@ -58,6 +60,6 @@ records = [
 
 with engine.begin() as conn:
     conn.execute(text(f"TRUNCATE TABLE {config['staging']['table']};"))
-    outils.chronometre_logging_lambda("Import SQL Server", lambda: conn.execute(insert(joconde_table), records))
+    utils.chronometre_logging_lambda("Import SQL Server", lambda: conn.execute(insert(joconde_table), records))
 
 logging.info("Données importées")
