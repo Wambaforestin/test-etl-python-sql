@@ -16,19 +16,22 @@ GO
 CREATE SCHEMA staging;
 GO
 
-CREATE TABLE staging.joconde (
-    --id INT IDENTITY PRIMARY KEY NOT NULL,
-    reference NVARCHAR(50),
-    appellation NVARCHAR(255),
-    auteur NVARCHAR(255),
-    date_creation NVARCHAR(50),
-    region NVARCHAR(100),
-    departement NVARCHAR(100),
-    description NVARCHAR(MAX),
-    load_timestamp_utc DATETIMEOFFSET(3) DEFAULT GETUTCDATE(),
-    source_system VARCHAR(50),
-    load_process varchar(50)
-) WITH (DATA_COMPRESSION = ROW);
+USE [joconde_staging]
+GO
+
+CREATE TABLE [staging].[joconde](
+	[reference] [nvarchar](max) NULL,
+	[appellation] [nvarchar](max) NULL,
+	[auteur] [nvarchar](max) NULL,
+	[date_creation] [nvarchar](max) NULL,
+	[region] [nvarchar](max) NULL,
+	[departement] [nvarchar](max) NULL,
+	[description] [nvarchar](max) NULL,
+	[load_timestamp_utc] [datetimeoffset](3) NOT NULL DEFAULT (getutcdate()),
+	[source_system] [varchar](50) NULL,
+	[load_process] [varchar](50) NULL
+) 
+WITH ( DATA_COMPRESSION = ROW)
 GO
 
 -- permissions
